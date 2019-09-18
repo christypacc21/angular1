@@ -3,7 +3,19 @@
 <p>product-list component</p>
 
 
-<div *ngFor="let product of products;">
-    {{product.name}}
-    <button (click)="alert()">alert</button>
+<div *ngFor="let product of products;" style="border:5px solid grey; margin:10px;">
+    <a [title]="product.name + ' details'">
+        {{product.name}}
+    </a>
+    <p *ngIf="product.description">
+        Description: {{product.description}}
+    </p>
+
+    <app-product-alerts 
+        [product]="product"
+        (notify)="onNotify()"
+    ></app-product-alerts>
+    <!-- if forgot to pass product, something in the ui will break -->
+    
+    <button (click)="alert(product)">alert</button>
 </div>

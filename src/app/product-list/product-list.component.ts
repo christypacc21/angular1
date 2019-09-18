@@ -9,9 +9,14 @@ import { products } from '../products';
 export class ProductListComponent {
   products = products;
 
-  alert() {
+  alert(product) {
     window.alert('asdfasdfkjasdfh');
+    // window.alert(`product: ${product}`); -> seems template string sin jo dou (string + var geh combination)
     // window.alert("asdfasdfkjasdfh"); // doesnt work for "" -> hv error
+  }
+
+  onNotify(){
+    window.alert("notify is pressed!")
   }
 
 
