@@ -3,13 +3,14 @@
 <p>product-list component</p>
 
 
-<div *ngFor="let product of products;" style="border:5px solid grey; margin:10px;">
-    <a [title]="product.name + ' details'">
-        {{product.name}}
+<div *ngFor="let product of products; index as productId" style="border:5px solid grey; margin:10px;">
+    <a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
+        {{ product.name }}
     </a>
     <p *ngIf="product.description">
         Description: {{product.description}}
     </p>
+        
 
     <app-product-alerts 
         [product]="product"
@@ -19,3 +20,22 @@
     
     <button (click)="alert(product)">alert</button>
 </div>
+
+<form [formGroup]='checkoutForm' (ngSubmit)="onSubmit(checkoutForm.value)">
+        <div>
+            <label for="name">
+                Name
+            </label>
+            <input id="name" type="text" formControlName="name">
+            <!-- the id ho chi ng gwan form geh logic si, may be is related to later css sth -->
+        </div>
+            
+        <div>
+            <label for="address">
+                Address
+            </label>
+            <input id="address" type="text" formControlName="address">
+            <!-- the id ho chi ng gwan form geh logic si, may be is related to later css sth -->
+        </div>
+    <button type="submit" >Sumbit</button>
+</form>

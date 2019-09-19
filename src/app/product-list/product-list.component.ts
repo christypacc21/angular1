@@ -1,13 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { products } from '../products';
+import { FormBuilder } from '@angular/forms'
+import { HahaformService } from '../hahaform.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
   products = products;
+  checkoutForm;
+  constructor(
+    private formBuilder: FormBuilder,
+    private hahaformService: HahaformService
+  ) {
+      this.checkoutForm = this.formBuilder.group({
+        name: '',
+        address: ''
+      });
+  }
+
+  onSubmit(customerData){
+    console.log(customerData)
+    this.hahaformService.addToItem(customerData);
+    this.checkoutForm.reset();
+
+  }
 
   alert(product) {
     window.alert('asdfasdfkjasdfh');
@@ -23,6 +42,7 @@ export class ProductListComponent {
 
   // export class ProductListComponent implements OnInit {
   // constructor() { }
-  // ngOnInit() {
-  // }
+  ngOnInit() {
+    this.hahaformService.getItems();
+  }
 }
